@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PraktykiProjekt.Models.City>
+
+@{
+    ViewBag.Title = "Set";
+}
+<script>
+
+    $(document).ready(function () {
+        $('#city').autocomplete({
+            source: '@Url.Action("Autocomplete")'
+        });
+    })
+
+</script>
+
+
+<h2>Set</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Miasto")
+    @Html.TextBox("city", null, new { @name = "City" })
+
+    <input type="submit" value="Wybierz"/>
+}

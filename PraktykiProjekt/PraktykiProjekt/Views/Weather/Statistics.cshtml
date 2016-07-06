@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PraktykiProjekt.Models.City>
+
+@{
+    ViewBag.Title = "Statistics";
+}
+
+<h2>Statistics</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@foreach (var item in Model)
+{
+    string id = "chartdiv" + item.CityId.ToString();
+    <div id="row">
+
+        <div id="@id"></div>
+        <hr />
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $.getJSON("/Weather/GetChartData?cityId=@item.CityId", null, function (data) {
+                    var temps = [];
+                    var hums = [];
+                    $.each(data, function (key, val) {
+                        temps.push([val.Date, val.Temperature]);
+                        hums.push([val.Date, val.Humidity]);
+                    });
+
+                    $.jqplot('@id', [temps, hums], {
+                        title: '@item.Name',
+                        axes: {
+                            xaxis: {
+                                renderer: $.jqplot.DateAxisRenderer
+                            }
+                        },
+                        series: [
+            {
+                label: 'Temperature'
+            },
+            {
+                label: 'Humidity'
+            }
+                        ],
+                        legend: {
+                            show: true,
+                            placement: 'outside'
+                        },
+
+                    });
+                });
+            });
+        </script>
+    </div>
+
+
+}
+
