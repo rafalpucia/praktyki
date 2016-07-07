@@ -45,11 +45,9 @@ namespace PraktykiProjekt
             using (var ctx = new ApplicationDbContext())
             {
                 var result = new List<City>();
-                var user = ctx.Users.Where(u => u.UserName == HttpContext.Current.User.Identity.Name).Single();
-                foreach (var item in ctx.Cities.ToList())
-                {
-                    if (item.UserList.Contains(user)) result.Add(item);
-                }
+                //var user = ctx.Users.Where(u => u.UserName == HttpContext.Current.User.Identity.Name).Single();
+
+                result = ctx.Cities.Where(c => c.UserList.Select(u => u.UserName).Contains(HttpContext.Current.User.Identity.Name)).ToList();
                 return result;
             }
         }
@@ -59,6 +57,36 @@ namespace PraktykiProjekt
             using (var ctx = new ApplicationDbContext())
             {
                 return ctx.Weathers.Where(u => u.City.CityId == cityId).ToList();
+            }
+        }
+
+        public void AddCityForUser(string city)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var cityToDb = ctx.Cities.Where(u => u.Name == city).FirstOrDefault();
+                var user = ctx.Users.Where(u => u.UserName == HttpContext.Current.User.Identity.Name).Single();
+
+                if (!user.Cities.Contains(cityToDb) && !cityToDb.UserList.Contains(user))
+                {
+                    cityToDb.UserList.Add(user);
+                    user.Cities.Add(cityToDb);
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        public void DeleteUsersCity(int cityId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var city = ctx.Cities.Find(cityId);
+                var user = ctx.Users.Where(u => u.UserName == HttpContext.Current.User.Identity.Name).Single();
+
+                ctx.Users.Find(user.Id).Cities.Remove(city);
+                ctx.Cities.Find(city.CityId).UserList.Remove(user);
+
+                ctx.SaveChanges();
             }
         }
     }

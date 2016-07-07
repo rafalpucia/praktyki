@@ -7,13 +7,13 @@ namespace PraktykiProjekt.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class test : IMigrationMetadata
+    public sealed partial class poprawa_miast : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(poprawa_miast));
         
         string IMigrationMetadata.Id
         {
-            get { return "201607062224466_test"; }
+            get { return "201607060931599_poprawa_miast"; }
         }
         
         string IMigrationMetadata.Source

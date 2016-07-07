@@ -16,7 +16,7 @@ namespace PraktykiProjekt.Controllers
         public ActionResult Index()
         {
             /*
-            using (StreamReader r = new StreamReader("C:/Users/rafal/Desktop/PraktykiProjekt/PraktykiProjekt/Json/city.list.json"))
+            using (StreamReader r = new StreamReader("C:/Users/ideo9/Documents/Visual Studio 2015/Projects/PraktykiProjekt/PraktykiProjekt/Json/city.list.json"))
             {
                 
                 string line;

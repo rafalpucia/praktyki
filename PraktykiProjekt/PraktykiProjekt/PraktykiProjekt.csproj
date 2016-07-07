@@ -215,12 +215,25 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607062224466_test.cs" />
-    <Compile Include="Migrations\201607062224466_test.Designer.cs">
-      <DependentUpon>201607062224466_test.cs</DependentUpon>
+    <Compile Include="Migrations\201607051324021_inicjalizacja.cs" />
+    <Compile Include="Migrations\201607051324021_inicjalizacja.Designer.cs">
+      <DependentUpon>201607051324021_inicjalizacja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607060721503_miasta.cs" />
+    <Compile Include="Migrations\201607060721503_miasta.Designer.cs">
+      <DependentUpon>201607060721503_miasta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607060931599_poprawa_miast.cs" />
+    <Compile Include="Migrations\201607060931599_poprawa_miast.Designer.cs">
+      <DependentUpon>201607060931599_poprawa_miast.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607060946470_relacja-user-city.cs" />
+    <Compile Include="Migrations\201607060946470_relacja-user-city.Designer.cs">
+      <DependentUpon>201607060946470_relacja-user-city.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CitiesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Entities\CityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -437,8 +450,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Weather\Set.cshtml" />
+    <Content Include="Views\Weather\Cities.cshtml" />
     <Content Include="Views\Weather\Statistics.cshtml" />
+    <Content Include="Views\Weather\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -448,9 +462,21 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607062224466_test.resx">
-      <DependentUpon>201607062224466_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607051324021_inicjalizacja.resx">
+      <DependentUpon>201607051324021_inicjalizacja.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607060721503_miasta.resx">
+      <DependentUpon>201607060721503_miasta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607060931599_poprawa_miast.resx">
+      <DependentUpon>201607060931599_poprawa_miast.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607060946470_relacja-user-city.resx">
+      <DependentUpon>201607060946470_relacja-user-city.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

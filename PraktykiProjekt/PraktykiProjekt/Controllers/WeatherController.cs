@@ -15,31 +15,48 @@ namespace PraktykiProjekt.Controllers
             return View();
         }
 
-        public ActionResult Set()
+        public ActionResult Cities()
+        {
+            var service = new WeatherService();
+
+            var model = new CitiesViewModel();
+            model.UsersCities = service.GetCitiesForUser();
+
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public ActionResult Cities(string city)
+        {
+            var service = new WeatherService();
+
+            service.AddCityForUser(city);
+
+            var model = new CitiesViewModel();
+            model.UsersCities = service.GetCitiesForUser();
+
+            return View(model);
+
+        }
+
+        public ActionResult Delete(int? cityId)
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var cities = ctx.Cities.ToList();
-                return View(cities);
+                var city = ctx.Cities.Find(cityId);
+                return View(city);
             }
         }
 
         [HttpPost]
-        public ActionResult Set(string city)
+        public ActionResult Delete(int cityId)
         {
-            using (var ctx = new ApplicationDbContext())
-            {
-                var cityToDb = ctx.Cities.Where(u => u.Name == city).FirstOrDefault();
-                var user = ctx.Users.Where(u => u.UserName == User.Identity.Name).Single();
+            var service = new WeatherService();
+            service.DeleteUsersCity(cityId);
 
-                if (!user.Cities.Contains(cityToDb) && !cityToDb.UserList.Contains(user))
-                {
-                    cityToDb.UserList.Add(user);
-                    user.Cities.Add(cityToDb);
-                    ctx.SaveChanges();
-                }
-                return View();
-            }
+            return RedirectToAction("Cities");
+
         }
 
         public ActionResult Statistics()

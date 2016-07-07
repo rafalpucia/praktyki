@@ -1,0 +1,47 @@
+﻿@model PraktykiProjekt.Models.CitiesViewModel
+
+@{
+    ViewBag.Title = "Set";
+}
+<script>
+
+    $(document).ready(function () {
+        $('#city').autocomplete({
+            source: '@Url.Action("Autocomplete")'
+        });
+    })
+
+</script>
+
+
+<h2>Set</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Add city")
+    @Html.TextBox("city", null, new { @name = "City", @class = "form-control" })
+
+    <input type="submit" class="btn btn-primary" value="Wybierz" />
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UsersCities.FirstOrDefault().Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.UsersCities)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { cityId = item.CityId })
+            </td>
+        </tr>
+    }
+
+</table>
